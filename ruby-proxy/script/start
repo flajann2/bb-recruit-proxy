@@ -12,3 +12,6 @@ puts "Starting up proxy..."
 #sleep 15 # give rabbitmq and ruby-invoice time to get up
 
 require_relative '../proxy/server'
+
+Thread.new{ client_responses! }
+Thread.new{ invoice_responses! }

@@ -11,10 +11,10 @@ services:
       - RABBIT_HOST=rabbitmq
     depends_on:
       - rabbitmq
-  ruby-proxy:
-    build: ./ruby-proxy
-    environment:
-      - RABBIT_HOST=rabbitmq
-    depends_on:
-      - rabbitmq
-      - ruby-invoices
+#  ruby-proxy:
+#    build: ./ruby-proxy
+#    environment:
+#      - RABBIT_HOST=rabbitmq
+#    depends_on:
+#      - rabbitmq
+#      - ruby-invoices

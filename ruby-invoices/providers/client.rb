@@ -12,7 +12,9 @@ class Client
 
     @q.subscribe do |delivery_info, properties, payload|
       r = { clients: self.class.clients }
-      @x.publish(JSON.generate(r), :routing_key => properties.reply_to, :correlation_id => properties.correlation_id)
+      @x.publish(JSON.generate(r),
+                 :routing_key => properties.reply_to,
+                 :correlation_id => properties.correlation_id)
     end
     puts "Client provider started!"
   end
