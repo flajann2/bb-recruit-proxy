@@ -1,24 +1,67 @@
-* Challenge
+* Challenge                                                        :TOC_5_gh:
+  - [[#docs-and-notes-on-the-results-of-the-challenge][Docs and Notes on the results of the challenge]]
+    - [[#installation-and-building][Installation and Building]]
+    - [[#the-json-api][The JSON Api]]
+      - [[#get-clientsjson][GET /clients.json]]
+      - [[#get-invoicesjsonclient_id][GET /invoices.json/:client_id]]
+  - [[#details-of-the-challenge][Details of the Challenge]]
+    - [[#the-ruby-service-provides-two-rabbit-mq-rpc-queues][The ruby service provides two rabbit-mq rpc queues]]
+    - [[#the-task-to-be-accomplished][The task to be accomplished]]
 
-In following repository, you can a docker-compose file defining
-small backend for invoicing application. It contains two
-services - rabbitmq server and ruby-invoices.
+** Docs and Notes on the results of the challenge
+   We now have a new container that serves as a very simple
+   Sinatra proxy for the insurance microservice. Since ths
+   was meant to be a 2-hour or so challenge, no considerations
+   were made much for scalability. Having said that, it works well.
 
-** The ruby service provides two rabbit-mq rpc queues
-- "backend.clients" - gives you a list of clients in json format -
-  the request sent to this queue can be empty.
+*** Installation and Building
+    Clone this repository, and cd into the root of it. Then run
 
-- "backend.invoices" - gives you list of invoices for given client_id
-  in json format. The request sent to this queue should also be in
-  json format i.e. `{"client_id":"client-id-goes-here"}`
+    #+begin_src bash
+    docker-compose up --build
+    #+end_src
 
-** Your task is
-- to create a small proxy application that would take the incoming
-  http GET requests to /clients.json and /invoices.json)
+    That will build all the container and launch the
+    stack.
 
-- and translate those into rabbitmq rpc calls to respective
-  queues in the ruby service - whatever you received from the
-  queue should be sent back as a reply to that http request that was made.
+    End it with
 
-- as the last step add that new application to docker-compose
-  file so it can be easily fired together with the existing services.
+    #+begin_src bash
+    docker-compose down
+    #+end_src
+
+*** The JSON Api
+    The REST endpoint has been mapped to the host port of 80.
+    as such, your browser will be able to access the endpoint
+    without having to give a port number.
+
+**** GET /clients.json
+     This will return a list of client ids.
+
+**** GET /invoices.json/:client_id
+     Given the client id, it will return the invoice
+     for that client. (I love the snazzy quips!)
+
+** Details of the Challenge
+   In following repository, you can a docker-compose file defining
+   small backend for invoicing application. It contains two
+   services - rabbitmq server and ruby-invoices.
+
+*** The ruby service provides two rabbit-mq rpc queues
+ - "backend.clients" - gives you a list of clients in json format -
+   the request sent to this queue can be empty.
+
+ - "backend.invoices" - gives you list of invoices for given client_id
+   in json format. The request sent to this queue should also be in
+   json format i.e. `{"client_id":"client-id-goes-here"}`
+
+*** The task to be accomplished
+ - to create a small proxy application that would take the incoming
+   http GET requests to /clients.json and /invoices.json)
+
+ - and translate those into rabbitmq rpc calls to respective
+   queues in the ruby service - whatever you received from the
+   queue should be sent back as a reply to that http request that was made.
+
+ - as the last step add that new application to docker-compose
+   file so it can be easily fired together with the existing services.
