@@ -22,7 +22,7 @@
     #+end_src
 
     That will build all the container and launch the
-    stack.
+    stack. It will take about 30 seconds to launch.
 
     End it with
 
