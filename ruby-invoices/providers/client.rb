@@ -20,5 +20,4 @@ class Client
   def self.clients
     ["google", "facebook", "yahoo", "twitter"]
   end
-
 end

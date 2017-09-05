@@ -11,4 +11,3 @@ services:
       - RABBIT_HOST=rabbitmq
     depends_on:
       - rabbitmq
-
