@@ -24,8 +24,9 @@ class Invoice
         { error: "Can't parse the payload - send {\"client_id\": \"<desired client id>\" } as payload" }
       end
 
-      @x.publish(JSON.generate(r), :routing_key => properties.reply_to, :correlation_id => properties.correlation_id)
-
+      @x.publish(JSON.generate(r),
+                 :routing_key => properties.reply_to,
+                 :correlation_id => properties.correlation_id)
     end
     puts "Invoice provider started!"
   end

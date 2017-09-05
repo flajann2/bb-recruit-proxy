@@ -1,0 +1,23 @@
+#!/usr/bin/env ruby
+
+require 'bundler'
+Bundler.require
+
+PROXY_HOST = ENV["RABBIT_HOST"] || 'localhost'
+PROXY_PORT = ENV["RABBIT_PORT"] || 5672
+PROXY_USER = ENV["RABBIT_USER"] || 'guest'
+PROXY_PASSWORD = ENV["RABBIT_PASSWORD"] || 'guest'
+
+puts "Starting up proxy..."
+sleep 12 # give rabbitmq and ruby-invoice time to get up
+
+require_relative '../proxy/server'
+
+# Launch client proxy
+Thread.new{ client_responses! }
+
+# Wait a bit for client proxy to settle
+sleep 2
+
+# launch invoice proxy
+Thread.new{ invoice_responses! }
