@@ -2,6 +2,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     amq-protocol (2.2.0)
+    aquarium (0.5.1)
     bunny (2.7.0)
       amq-protocol (>= 2.2.0)
     coderay (1.1.2)
@@ -12,9 +13,14 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
+    queue_ding (0.1.5)
+      aquarium (~> 0)
+      json (~> 2.0, >= 2.0.2)
+      semver2 (~> 3)
     rack (2.0.3)
     rack-protection (2.0.0)
       rack
+    semver2 (3.4.2)
     sinatra (2.0.0)
       mustermann (~> 1.0)
       rack (~> 2.0)
@@ -30,6 +36,7 @@ DEPENDENCIES
   bunny
   json
   pry
+  queue_ding
   sinatra
 
 BUNDLED WITH

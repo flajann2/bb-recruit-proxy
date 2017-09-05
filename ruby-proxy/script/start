@@ -3,18 +3,12 @@
 require 'bundler'
 Bundler.require
 
-require_relative '../proxy/server'
-
-host = ENV["RABBIT_HOST"] || 'localhost'
-port = ENV["RABBIT_PORT"] || 5672
-user = ENV["RABBIT_USER"] || 'guest'
-password = ENV["RABBIT_PASSWORD"] || 'guest'
+PROXY_HOST = ENV["RABBIT_HOST"] || 'localhost'
+PROXY_PORT = ENV["RABBIT_PORT"] || 5672
+PROXY_USER = ENV["RABBIT_USER"] || 'guest'
+PROXY_PASSWORD = ENV["RABBIT_PASSWORD"] || 'guest'
 
 puts "Starting up proxy..."
 #sleep 15 # give rabbitmq and ruby-invoice time to get up
 
-connection = Bunny.new("amqp://#{user}:#{password}@#{host}:#{port}")
-connection.start
-
-puts "running ..."
-Thread.new{ Server.service(connection.create_channel) }
+require_relative '../proxy/server'
