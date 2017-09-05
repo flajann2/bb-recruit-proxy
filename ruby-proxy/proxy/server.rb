@@ -11,6 +11,9 @@ include QueueDing
 INVOICE_RESPONSE_QUEUE = QDing.new
 CLIENT_RESPONSE_QUEUE = QDing.new
 
+set :bind,'0.0.0.0'
+set :port, 8080
+
 def connection
   unless $connection
     $connection = Bunny.new("amqp://#{PROXY_USER}:#{PROXY_PASSWORD}@#{PROXY_HOST}:#{PROXY_PORT}")

@@ -1,4 +1,4 @@
-FROM ruby:2.3.3-slim
+FROM ruby:2.4.1-slim
 
 ARG BUILD_PACKAGES="git-core openssh-client g++ make libssl-dev"
 ARG DEBIAN_FRONTEND=noninteractive

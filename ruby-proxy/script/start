@@ -9,9 +9,15 @@ PROXY_USER = ENV["RABBIT_USER"] || 'guest'
 PROXY_PASSWORD = ENV["RABBIT_PASSWORD"] || 'guest'
 
 puts "Starting up proxy..."
-#sleep 15 # give rabbitmq and ruby-invoice time to get up
+sleep 12 # give rabbitmq and ruby-invoice time to get up
 
 require_relative '../proxy/server'
 
+# Launch client proxy
 Thread.new{ client_responses! }
+
+# Wait a bit for client proxy to settle
+sleep 2
+
+# launch invoice proxy
 Thread.new{ invoice_responses! }
