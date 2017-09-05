@@ -34,7 +34,6 @@ end
 # this never returns
 def client_responses!
   channel.queue(REPLY_TO_CLIENT).subscribe do |delivery_info, properties, payload|
-    puts payload
     CLIENT_RESPONSE_QUEUE << payload
   end
 end
@@ -42,7 +41,6 @@ end
 # this never returns
 def invoice_responses!
   channel.queue(REPLY_TO_INVOICE).subscribe do |delivery_info, properties, payload|
-    puts payload
     INVOICE_RESPONSE_QUEUE << payload
   end
 end
